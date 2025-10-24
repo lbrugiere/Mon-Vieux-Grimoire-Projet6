@@ -19,7 +19,7 @@ const upload = multer({
 module.exports = async (req, res, next) => {
   upload(req, res, async (err) => {
     if (err) {
-      return res.status(400).json({ error: err.message });
+      return res.status(500).json({ err });
     }
 
     if (!req.file) {
@@ -39,7 +39,7 @@ module.exports = async (req, res, next) => {
 
       next();
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(500).json({ error });
     }
   });
 };

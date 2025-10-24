@@ -12,9 +12,9 @@ exports.createBook = async (req, res, next) => {
       userId: req.auth.userId,
       imageUrl: req.file
         ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-        : bookObject.imageUrl
+        : bookObject.imageUrl,
     });
-    await book.save()
+    await book.save();
     res.status(201).json(book);
   } catch (error) {
     res.status(500).json({ error });
