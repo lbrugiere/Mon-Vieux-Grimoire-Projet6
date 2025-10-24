@@ -7,9 +7,19 @@ const userRoutes = require('./routes/user');
 
 const app = express();
 
+// Liste blanche des origines autorisées
+const allowedOrigins = [
+  'http://localhost:3000',
+];
+
 // Middleware CORS
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+
   res.setHeader(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization',
@@ -18,6 +28,7 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Methods',
     'GET, POST, PUT, DELETE, PATCH, OPTIONS',
   );
+
   next();
 });
 
