@@ -1,6 +1,6 @@
 const Book = require('../../models/Book');
 
-exports.rateBook = async (req, res, next) => {
+module.exports = async (req, res, next) => {
   try {
     const bookId = req.params.id;
     const userId = req.auth.userId;
@@ -8,7 +8,7 @@ exports.rateBook = async (req, res, next) => {
 
     const book = await Book.findById(bookId);
     if (!book) {
-      return res.status(404).json({ message: 'Livre non trouvé'});
+      return res.status(404).json({ message: 'Livre non trouvé' });
     }
 
     const alreadyRated = book.ratings.find(r => r.userId === userId);

@@ -1,6 +1,6 @@
 const Book = require('../../models/Book');
 
-exports.createBook = async (req, res, next) => {
+module.exports = async (req, res, next) => {
   try {
     const bookObject = req.file
       ? JSON.parse(req.body.book)
